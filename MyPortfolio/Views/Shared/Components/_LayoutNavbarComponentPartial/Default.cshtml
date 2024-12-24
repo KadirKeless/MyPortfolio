@@ -1,101 +1,99 @@
-﻿@model List<ToDoList>
+﻿@model MyPortfolio.Models.NavBarCombinedViewModel
 
 <div class="main-header">
 	<div class="logo-header">
-		<a href="index.html" class="logo">
+		<a href="/Dashboard/Index" class="panel-title">
 			Admin Paneli
 		</a>
 		<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
+
 		<button class="topbar-toggler more"><i class="la la-ellipsis-v"></i></button>
 	</div>
 	<nav class="navbar navbar-header navbar-expand-lg">
 		<div class="container-fluid">
-
-			<form class="navbar-left navbar-form nav-search mr-md-3" action="">
-				<div class="input-group">
-					<input type="text" placeholder="Aranacak Kelimeyi Giriniz ..." class="form-control">
-					<div class="input-group-append">
-						<span class="input-group-text">
-							<i class="la la-search search-icon"></i>
-						</span>
-					</div>
-				</div>
-			</form>
-			<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-				<li class="nav-item dropdown hidden-caret">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="la la-envelope"></i>
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">Gelen Mesajlar</a>
-						<a class="dropdown-item" href="#">Yeni Mesaj</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">İletişim Paneli</a>
-					</div>
-				</li>
-
-
-
-				<li class="nav-item dropdown hidden-caret">
-					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<i class="la la-bell"></i>
-						<span class="notification">@ViewBag.toDoListCount</span>
-					</a>
-					<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdown">
-						<li>
-							<div class="dropdown-title">@ViewBag.toDoListCount Yeni Bildiriminiz Var</div>
-						</li>
-						<li>
-							<div class="notif-center">
-
-								@foreach (var item in Model)
-								{
-									<a href="#">
-										<div class="notif-icon notif-success"> <i class="@item.ImageUrl"></i> </div>
-										<div class="notif-content">
-											<span class="block">
-												@item.Title
-											</span>
-											<span class="time">@item.Date.ToShortDateString()</span>
-										</div>
-									</a>
-								}
-
-
-
-							</div>
-						</li>
-						<li>
-							<a class="see-all" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="la la-angle-right"></i> </a>
-						</li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="~/Ready-Bootstrap-Dashboard-master/assets/img/kadir.jpg" alt="user-img" width="36" class="img-circle"><span>Admin</span></span> </a>
-					<ul class="dropdown-menu dropdown-user">
-						<li>
-							<div class="user-box">
-								<div class="u-img"><img src="~/Ready-Bootstrap-Dashboard-master/assets/img/kadir.jpg" alt="user"></div>
-								<div class="u-text">
-									<h4>Kadir K.</h4>
-									<p class="text-muted">kadirkeles3402@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">Profili Gör</a>
-								</div>
-							</div>
-						</li>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><i class="ti-user"></i>Profilim</a>
-						<a class="dropdown-item" href="#"></i> Siteye Git</a>
-						<a class="dropdown-item" href="#"><i class="ti-email"></i> Gelen Mesajlar</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><i class="ti-settings"></i> Şifre Değiştir</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><i class="fa fa-power-off"></i> Çıkış Yap</a>
-					</ul>
-					<!-- /.dropdown-user -->
-				</li>
-			</ul>
 		</div>
+		<ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
+			<li class="nav-item dropdown hidden-caret">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownEnvelope" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="la la-envelope navbar-icon"></i>
+					<span class="notification">@ViewBag.NotReadMessageCount</span>
+				</a>
+				<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdownEnvelope">
+					<li>
+						<div class="dropdown-title">Toplam @ViewBag.NotReadMessageCount Okunmamış Mesajınız Var</div>
+					</li>
+					<li>
+
+						<div class="notif-center">
+							@foreach (var message in Model.Messages)
+							{
+								<a href="#">
+									<div class="notif-icon notif-primary" style="width: 30px; height: 30px;">
+										<i class="la la-comment"></i>
+									</div>
+									<div class="notif-content">
+										<span class="block"><strong>@message.NameSurname</strong></span>
+										<span class="block">@message.Subject</span>
+										<span class="time">@message.SendDate.ToShortDateString()</span>
+									</div>
+								</a>
+							}
+						</div>
+					</li>
+					<li>
+						<a class="see-all x1" href="/Message/Inbox"> <strong>Bildirimleri Gör</strong> <i class="la la-angle-right"></i> </a>
+					</li>
+				</ul>
+			</li>
+			<li class="nav-item dropdown hidden-caret">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownFolder" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<i class="la la-folder-o navbar-icon"></i>
+					<span class="notification">@ViewBag.UnmadeToDoListCount</span>
+				</a>
+				<ul class="dropdown-menu notif-box" aria-labelledby="navbarDropdownFolder">
+					<li>
+						<div class="dropdown-title">Toplam @ViewBag.UnmadeToDoListCount Yapılmamış Göreviniz Var</div>
+					</li>
+					<li>
+						<div class="notif-center">
+							@foreach (var toDoLİst in Model.ToDoLists)
+							{
+								<a href="#">
+									<div class="notif-icon notif-primary" style="width: 30px; height: 30px;">
+										<i class="la la-folder"></i>
+									</div>
+									<div class="notif-content">
+										<span class="block">@toDoLİst.Title</span>
+										<span class="time">@toDoLİst.Date.ToString("dd.MM.yyyy")</span>
+									</div>
+								</a>
+							}
+
+						</div>
+					</li>
+					<li>
+						<a class="see-all x1" href="/ToDoList/Index"> <strong>Yapılacakları Gör</strong> <i class="la la-angle-right"></i> </a>
+					</li>
+				</ul>
+			</li>
+		</ul>
 	</nav>
 </div>
+<script>
+	document.querySelectorAll('.x1').forEach(link => {
+		link.addEventListener('click', function (e) {
+			e.preventDefault(); // Varsayılan tıklama davranışını engelle
+			showLoader(); // Loader'ı göster
+
+			const targetHref = this.getAttribute('href'); // Tıklanan linkin hedef adresini al
+			setTimeout(() => {
+				if (targetHref) {
+					window.location.href = targetHref; // Hedef sayfaya yönlendir
+				}
+			}, 1000); // 1 saniye bekle
+		});
+	});
+
+</script>

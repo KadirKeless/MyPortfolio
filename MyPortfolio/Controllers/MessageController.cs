@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyPortfolio.DAL.Context;
 using MyPortfolio.DAL.Entities;
 
 namespace MyPortolioUdemy.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class MessageController : Controller
     {
         MyPortfolioContext context = new MyPortfolioContext();
